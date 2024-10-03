@@ -75,13 +75,19 @@ Widget build( BuildContext context ) {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
-                  TextButton(onPressed: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Page2()),
+                  TextButton(
+                  onPressed: () {
+                   Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Page2()),
                   );
-                  }, child:Text('See More')
-                  ),
+               },
+              child: Text('See More'),
+              style: TextButton.styleFrom(
+              primary: Color.fromARGB(255, 0, 0, 0), // Mengubah warna teks menjadi biru
+            ),
+            ),
+
                 ],
               ),
             ),
