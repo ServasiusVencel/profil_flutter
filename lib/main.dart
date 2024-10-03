@@ -66,14 +66,20 @@ Widget build( BuildContext context ) {
                     radius: 100.0,
                     backgroundImage: AssetImage('assets/images/fto.jpg'),
                   ),
-                  Text("Servasius Vencel",
+                  Text(
+                  "Servasius Vencel",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  style: TextStyle(
+                  fontSize: 18, 
+                  color: Colors.black, 
+                  fontWeight: FontWeight.bold, // Tempatkan fontWeight di dalam TextStyle
                   ),
+                ),
+
 
                   Text("Full-Stack Developer",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 227, 222, 222)),
                   ),
                   TextButton(
                   onPressed: () {
@@ -84,7 +90,7 @@ Widget build( BuildContext context ) {
                },
               child: Text('See More'),
               style: TextButton.styleFrom(
-              primary: Color.fromARGB(255, 0, 0, 0), // Mengubah warna teks menjadi biru
+              primary: Color.fromARGB(255, 255, 255, 255), 
             ),
             ),
 
