@@ -1,111 +1,185 @@
-import 'package:flutter/material.dart'; //perintah untuk mengimport library material dart bawaan dari flutter
-import 'Page2.dart';
+import 'package:flutter/material.dart';
+import 'page1.dart'; // Import page1.dart
 
-void main() { //fungsi main adalah fungsi yang pertama kali dijalankan oleh Flutter
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: home(),
-  )); 
+void main() {
+  runApp(const MyApp());
 }
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-class home extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Belajar Flutter', //perintah untuk memberikan judul pada aplikasi kalian
-//       home:Scaffold(
-//         appBar: AppBar(
-//           backgroundColor: Colors.blue,
-//           leading: Icon(Icons.home),
-//           title: Text('Belajar Flutter'), 
-//         ),
-// body:Center(
-//             child: Card(
-//               elevation: 3,
-//               child: Image.asset("assets/images/.jpg",
-//               width: 150,
-//               height: 150,
-//               ),
-//             )
-//             )
-//       ),
-        
-//       );
-//   }
-const home({Key?key}) : super(key:key);
-
-@override
-Widget build( BuildContext context ) {
-  return Scaffold(
-    body: Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.jpeg"),
-            fit: BoxFit.cover
-          )
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      child: Stack(
-         alignment: Alignment.center ,
-         children: <Widget>[
-         Container(
-           width: MediaQuery.of(context).size.width,
-           height: MediaQuery.of(context).size.shortestSide,  
-           padding:EdgeInsets.all(20.0),
-           alignment: Alignment.center,
-           child: Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0),),
-            color: Color.fromARGB(255, 149, 109, 22).withOpacity(0.7),
-            child: Center(
+      home: const MyProfilePage(),
+    );
+  }
+}
+
+class MyProfilePage extends StatefulWidget {
+  const MyProfilePage({super.key});
+
+  @override
+  State<MyProfilePage> createState() => _MyProfilePageState();
+}
+
+class _MyProfilePageState extends State<MyProfilePage> {
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
+  final TextEditingController _deskripsiController = TextEditingController();
+  final TextEditingController _sekolahController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Profile Form"),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CircleAvatar(
-                    radius: 100.0,
-                    backgroundImage: AssetImage('assets/images/fto.jpg'),
+                  const Text(
+                    "Update Profile",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                  Text(
-                  "Servasius Vencel",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                  fontSize: 18, 
-                  color: Colors.black, 
-                  fontWeight: FontWeight.bold, // Tempatkan fontWeight di dalam TextStyle
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Fill out the form to update your profile",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-
-
-                  Text("Full-Stack Developer",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 227, 222, 222)),
+                  const SizedBox(height: 30),
+                  TextFormField(
+                    controller: _namaController,
+                    decoration: InputDecoration(
+                      labelText: "Nama",
+                      hintText: "Masukkan nama Anda",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixIcon: const Icon(Icons.person),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Nama tidak boleh kosong';
+                      }
+                      return null;
+                    },
                   ),
-                  TextButton(
-                  onPressed: () {
-                   Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Page2()),
-                  );
-               },
-              child: Text('See More'),
-              style: TextButton.styleFrom(
-              primary: Color.fromARGB(255, 255, 255, 255), 
-            ),
-            ),
-
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _roleController,
+                    decoration: InputDecoration(
+                      labelText: "Role",
+                      hintText: "Masukkan role Anda",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixIcon: const Icon(Icons.work),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Role tidak boleh kosong';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _deskripsiController,
+                    decoration: InputDecoration(
+                      labelText: "Deskripsi Singkat",
+                      hintText: "Masukkan deskripsi singkat",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixIcon: const Icon(Icons.description),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Deskripsi singkat tidak boleh kosong';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _sekolahController,
+                    decoration: InputDecoration(
+                      labelText: "Sekolah",
+                      hintText: "Masukkan nama sekolah Anda",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixIcon: const Icon(Icons.school),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Sekolah tidak boleh kosong';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 30),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // Pass the form data to page1.dart
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => home(
+                                nama: _namaController.text,
+                                role: _roleController.text,
+                                deskripsi: _deskripsiController.text,
+                                sekolah: _sekolahController.text,
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        "Save",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-           ),
-    )
-  ]
-)
-    )
-  );
+          ),
+        ),
+      ),
+    );
+  }
 }
-
-
-
-}
-
